@@ -14,7 +14,7 @@ class CloudwareController extends Controller
      */
     public function index()
     {
-        return $this->success(Cloudware::all());
+        return Cloudware::all();
     }
 
     /**

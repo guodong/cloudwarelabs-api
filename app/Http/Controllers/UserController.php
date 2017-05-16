@@ -105,7 +105,7 @@ class UserController extends Controller
         $user = User::where('username', $request->username)->first();
         if ($user && Hash::check($request->password, $user->password)) {
             $token = JWTAuth::fromUser($user);
-            return $token;
+            return ['token' => $token];
         }
         return Response::json([
             'data' => 'auth failed'

@@ -3004,6 +3004,7 @@ return array(
     'Tymon\\JWTAuth\\Validators\\PayloadValidator' => $vendorDir . '/tymon/jwt-auth/src/Validators/PayloadValidator.php',
     'Tymon\\JWTAuth\\Validators\\TokenValidator' => $vendorDir . '/tymon/jwt-auth/src/Validators/TokenValidator.php',
     'Tymon\\JWTAuth\\Validators\\ValidatorInterface' => $vendorDir . '/tymon/jwt-auth/src/Validators/ValidatorInterface.php',
+    'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
     'Webmozart\\Assert\\Assert' => $vendorDir . '/webmozart/assert/src/Assert.php',
     'XdgBaseDir\\Xdg' => $vendorDir . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
     'phpDocumentor\\Reflection\\DocBlock' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
