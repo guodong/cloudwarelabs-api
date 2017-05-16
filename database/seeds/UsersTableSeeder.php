@@ -11,10 +11,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        \App\Models\User::create([
             'id' => \Ramsey\Uuid\Uuid::uuid4(),
             'username' => 'admin',
-            'password' => bcrypt('cloudwareadmin'),
+            'password' => bcrypt('admin'),
             'role' => 'admin'
         ]);
     }

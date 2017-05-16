@@ -341,6 +341,7 @@ class ComposerStaticInit856f1c524d1dcee60b3380c4b077dc26
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
+        'CloudwaresTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CloudwaresTableSeeder.php',
         'CreateCloudwaresTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_14_070254_create_cloudwares_table.php',
         'CreateInstancesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_15_024457_create_instances_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',

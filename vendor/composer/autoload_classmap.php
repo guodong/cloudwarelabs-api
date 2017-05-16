@@ -33,6 +33,7 @@ return array(
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
+    'CloudwaresTableSeeder' => $baseDir . '/database/seeds/CloudwaresTableSeeder.php',
     'CreateCloudwaresTable' => $baseDir . '/database/migrations/2017_05_14_070254_create_cloudwares_table.php',
     'CreateInstancesTable' => $baseDir . '/database/migrations/2017_05_15_024457_create_instances_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',

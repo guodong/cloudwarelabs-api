@@ -108,7 +108,7 @@ class UserController extends Controller
             return ['token' => $token];
         }
         return Response::json([
-            'data' => 'auth failed'
+            'error' => 'auth failed'
         ], 401);
     }
 
