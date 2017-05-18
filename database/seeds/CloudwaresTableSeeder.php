@@ -16,7 +16,7 @@ class CloudwaresTableSeeder extends Seeder
             'name' => 'matlab',
             'logo' => 'http://cloudwarehub.com/apps/matlab/icon.png',
             'description' => 'MathWorks公司出品的商业数学软件',
-            'image' => 'ubuntu'
+            'image' => 'cloudwarelabs/xfce4-pulsar-gedit'
         ]);
     }
 }
