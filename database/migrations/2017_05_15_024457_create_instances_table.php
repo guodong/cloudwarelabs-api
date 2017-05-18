@@ -16,7 +16,6 @@ class CreateInstancesTable extends Migration
         Schema::create('instances', function (Blueprint $table) {
             $table->uuid('id');
             $table->uuid('cloudware_id');
-            $table->string('container_id');
             $table->string('rancher_container_id');
             $table->uuid('user_id');
             $table->timestamps();

@@ -15,13 +15,8 @@ class CloudwaresTableSeeder extends Seeder
             'id' => \Ramsey\Uuid\Uuid::uuid4(),
             'name' => 'matlab',
             'logo' => 'http://cloudwarehub.com/apps/matlab/icon.png',
-            'description' => 'MathWorks公司出品的商业数学软件'
+            'description' => 'MathWorks公司出品的商业数学软件',
+            'image' => 'ubuntu'
         ]);
-//        DB::table('cloudwares')->insert([
-//            'id' => \Ramsey\Uuid\Uuid::uuid4(),
-//            'name' => 'matlab',
-//            'logo' => 'http://cloudwarehub.com/apps/matlab/icon.png',
-//            'description' => 'MathWorks公司出品的商业数学软件'
-//        ]);
     }
 }

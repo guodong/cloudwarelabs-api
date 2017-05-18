@@ -3,11 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use GuzzleHttp\Psr7;
 
 class Handler extends ExceptionHandler
 {
@@ -53,6 +55,8 @@ class Handler extends ExceptionHandler
             return response(['error' => 'token expired'], $exception->getStatusCode());
         } elseif ($exception instanceof JWTException) {
             return response(['error' => 'token error'], $exception->getStatusCode());
+        } elseif ($exception instanceof ClientException) {
+            return response(['error' => ($exception->getResponse()->getBody()->getContents())], 500);
         }
         //return response(['error' => 'error'], 400);
         return parent::render($request, $exception);

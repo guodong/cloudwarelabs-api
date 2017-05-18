@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'rancher' => [
+        'endpoint' => env('RANCHER_ENDPOINT'),
+        'user' => env('RANCHER_USER'),
+        'pass' => env('RANCHER_PASS'),
+    ],
+
 ];
