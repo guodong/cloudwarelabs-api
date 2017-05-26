@@ -43,9 +43,18 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
+        $user = User::where('username', $request->username)->first();
+
+        if ($user) {
+            return Response::json([
+                'error' => 'user already exist'
+            ], 409);
+        }
+
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
+            'role' => 'student'
         ]);
         return $user;
     }
