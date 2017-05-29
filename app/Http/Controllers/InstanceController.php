@@ -46,7 +46,7 @@ class InstanceController extends Controller
             'stdinOpen' => true,
             'tty' => true,
             'readOnly' => false,
-            'networkMode' => "bridge",
+            //'networkMode' => "bridge",
             'type' => "container",
             'requestedHostId' => "1h5",
             'imageUuid' => "docker:" . $cloudware->image,
@@ -91,7 +91,7 @@ class InstanceController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -125,7 +125,21 @@ class InstanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $instance = Instance::find($id);
+        if (!$instance) {
+            return Response::json([
+                'error' => 'instance not found'
+            ], 404);
+        }
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('DELETE', config('services.rancher.endpoint') . '/projects/1a5/containers/' . $instance->rancher_container_id, [
+            'auth' => [config('services.rancher.user'), config('services.rancher.pass')],
+        ]);
+
+        $instance->delete();
+
+        return ['result' => 'success'];
     }
 
     private function getPulsarPort($rancher_container_id)
