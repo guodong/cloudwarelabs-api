@@ -153,7 +153,7 @@ class InstanceController extends Controller
         ]);
 
         $payload = \GuzzleHttp\json_decode($res->getBody());
-        if (!$payload->data[0]->publicPort) {
+        if (count($payload->data) === 0 || !$payload->data[0]->publicPort) {
             return null;
         }
 
