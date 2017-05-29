@@ -69,15 +69,17 @@ class InstanceController extends Controller
 
         $port = null;
         for ($i = 0; $i < 5; $i++) {
-            $port = $this->getPulsarPort($instance->rancher_container_id);
-            if ($port) {
+            $ip = $this->getPrivateIp($instance->rancher_container_id);
+            if ($ip) {
                 break;
             }
             sleep(2);
         }
-        if ($port) {
-            $ip = $this->getPulsarIp($port['id']);
-            $instance->ws = 'ws://' . $ip . ':' .$port['port'];
+        if ($ip) {
+            $client = new \LinkORB\Component\Etcd\Client('10.42.246.167:2379');
+            $client->set('/traefik/backends/'.$instance->id.'/servers/server1/url', $ip . ':5678');
+            $client->set('/traefik/frontends/'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/'.$instance->id);
+            $client->set('/traefik/frontends/'.$instance->id.'/backend', $instance->id);
         }
 
         $instance->ws = 'ws://api.cloudwarelabs.org:81/' . $instance->id;
@@ -142,6 +144,22 @@ class InstanceController extends Controller
         $instance->delete();
 
         return ['result' => 'success'];
+    }
+
+    private function getPrivateIp($rancher_container_id)
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = config('services.rancher.endpoint') . '/projects/1a5/containers/' . $rancher_container_id;
+        $res = $client->request('GET', $url, [
+            'auth' => [config('services.rancher.user'), config('services.rancher.pass')],
+        ]);
+
+        $payload = \GuzzleHttp\json_decode($res->getBody());
+        if (!$payload->primaryIpAddress) {
+            return null;
+        }
+
+        return $payload->primaryIpAddress;
     }
 
     private function getPulsarPort($rancher_container_id)
