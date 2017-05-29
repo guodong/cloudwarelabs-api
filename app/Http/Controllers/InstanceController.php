@@ -80,6 +80,8 @@ class InstanceController extends Controller
             $instance->ws = 'ws://' . $ip . ':' .$port['port'];
         }
 
+        $instance->ws = 'ws://api.cloudwarelabs.org:81/' . $instance->id;
+
         return $instance;
     }
 
