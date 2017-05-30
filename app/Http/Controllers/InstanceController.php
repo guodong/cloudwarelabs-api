@@ -77,12 +77,17 @@ class InstanceController extends Controller
         }
         if ($ip) {
             $client = new \LinkORB\Component\Etcd\Client('http://10.42.246.167:2379');
-            $client->set('/traefik/backends/'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5678');
-            $client->set('/traefik/frontends/'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/'.$instance->id);
-            $client->set('/traefik/frontends/'.$instance->id.'/backend', $instance->id);
+            $client->set('/traefik/backends/pulsar-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5678');
+            $client->set('/traefik/frontends/pulsar-'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/pulsar-'.$instance->id);
+            $client->set('/traefik/frontends/pulsar-'.$instance->id.'/backend', 'pulsar-'.$instance->id);
+
+            $client->set('/traefik/backends/fs-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5679');
+            $client->set('/traefik/frontends/fs-'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/fs-'.$instance->id);
+            $client->set('/traefik/frontends/fs-'.$instance->id.'/backend', 'fs-'.$instance->id);
         }
         sleep(8);
-        $instance->ws = 'ws://api.cloudwarelabs.org:81/' . $instance->id;
+        $instance->ws = 'ws://api.cloudwarelabs.org:81/pulsar-' . $instance->id;
+        $instance->fsapi = 'http://api.cloudwarelabs.org:81/fs-' . $instance->id;
 
         return $instance;
     }
