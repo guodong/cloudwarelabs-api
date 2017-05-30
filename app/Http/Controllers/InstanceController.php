@@ -76,7 +76,7 @@ class InstanceController extends Controller
             sleep(2);
         }
         if ($ip) {
-            $client = new \LinkORB\Component\Etcd\Client('10.42.246.167:2379');
+            $client = new \LinkORB\Component\Etcd\Client('http://10.42.246.167:2379');
             $client->set('/traefik/backends/'.$instance->id.'/servers/server1/url', $ip . ':5678');
             $client->set('/traefik/frontends/'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/'.$instance->id);
             $client->set('/traefik/frontends/'.$instance->id.'/backend', $instance->id);
