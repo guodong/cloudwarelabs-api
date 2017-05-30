@@ -81,7 +81,7 @@ class InstanceController extends Controller
             $client->set('/traefik/frontends/'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/'.$instance->id);
             $client->set('/traefik/frontends/'.$instance->id.'/backend', $instance->id);
         }
-
+        sleep(8);
         $instance->ws = 'ws://api.cloudwarelabs.org:81/' . $instance->id;
 
         return $instance;
