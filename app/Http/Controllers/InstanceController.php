@@ -52,6 +52,7 @@ class InstanceController extends Controller
             'imageUuid' => "docker:" . $cloudware->image,
             'ports' => ["5678/tcp"],
             'memory' => 134217728 * 4, // 128m*4
+            'command' => ['startxfce4']
         ];
         $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', config('services.rancher.endpoint') . '/projects/1a5/container', [
