@@ -7,6 +7,7 @@ use App\Models\Instance;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7;
+use Illuminate\Validation\Rules\In;
 
 class InstanceController extends Controller
 {
@@ -17,7 +18,11 @@ class InstanceController extends Controller
      */
     public function index(Request $request)
     {
-        return $request->user()->instances;
+        $instances = $request->user()->instances;
+        foreach ($instances as $i) {
+            $i->cloudware;
+        }
+        return $instances;
     }
 
     /**
@@ -101,7 +106,9 @@ class InstanceController extends Controller
      */
     public function show($id)
     {
-
+        $instance = Instance::find($id);
+        $instance->cloudware;
+        return $instance;
     }
 
     /**
