@@ -16,9 +16,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::get('token', 'UserController@token');
 Route::get('users/current', 'UserController@current');
@@ -28,4 +28,5 @@ Route::resource('users', 'UserController');
 
 Route::group(['middleware' => ['jwt.auth']], function () {
    Route::resource('instances', 'InstanceController');
+   Route::post('users/current/password', 'UserController@password');
 });

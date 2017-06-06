@@ -144,6 +144,19 @@ class UserController extends Controller
 
         // the token is valid and we have found the user via the sub claim
         return response()->json($user);
+    }
 
+    public function password(Request $request)
+    {
+        $this->validate($request, [
+            'oldpassword' => 'required',
+            'newpassword' => 'required|min:6'
+        ]);
+        $user = $request->user();
+        if (!Hash::check($request->oldpassword, $user->password)) {
+            return response()->json(['old password error'], 400);
+        }
+        $user->password = Hash::make($request->newpassword);
+        return response()->json(['password update success']);
     }
 }

@@ -90,6 +90,10 @@ class InstanceController extends Controller
             $client->set('/traefik/backends/fs-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5679');
             $client->set('/traefik/frontends/fs-'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/fs-'.$instance->id);
             $client->set('/traefik/frontends/fs-'.$instance->id.'/backend', 'fs-'.$instance->id);
+
+            $client->set('/traefik/backends/ide-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5680');
+            $client->set('/traefik/frontends/ide-'.$instance->id.'/routes/test_1/rule', 'PathPrefixStrip:/ide-'.$instance->id);
+            $client->set('/traefik/frontends/ide-'.$instance->id.'/backend', 'ide-'.$instance->id);
         }
         sleep(8);
         $instance->ws = 'ws://api.cloudwarelabs.org:81/pulsar-' . $instance->id;
