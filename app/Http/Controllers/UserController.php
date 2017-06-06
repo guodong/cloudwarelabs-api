@@ -157,6 +157,7 @@ class UserController extends Controller
             return response()->json(['old password error'], 400);
         }
         $user->password = Hash::make($request->newpassword);
+        $user->save();
         return response()->json(['password update success']);
     }
 }
