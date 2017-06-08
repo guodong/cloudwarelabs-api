@@ -74,12 +74,12 @@ class InstanceController extends Controller
         ]);
 
         $port = null;
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $ip = $this->getPrivateIp($instance->rancher_container_id);
             if ($ip) {
                 break;
             }
-            sleep(2);
+            sleep(1);
         }
         if ($ip) {
             $client = new \LinkORB\Component\Etcd\Client('http://10.42.246.167:2379');
@@ -87,9 +87,9 @@ class InstanceController extends Controller
             $client->set('/traefik/frontends/pulsar-'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/pulsar-'.$instance->id);
             $client->set('/traefik/frontends/pulsar-'.$instance->id.'/backend', 'pulsar-'.$instance->id);
 
-            $client->set('/traefik/backends/fs-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5679');
-            $client->set('/traefik/frontends/fs-'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/fs-'.$instance->id);
-            $client->set('/traefik/frontends/fs-'.$instance->id.'/backend', 'fs-'.$instance->id);
+//            $client->set('/traefik/backends/fs-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5679');
+//            $client->set('/traefik/frontends/fs-'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/fs-'.$instance->id);
+//            $client->set('/traefik/frontends/fs-'.$instance->id.'/backend', 'fs-'.$instance->id);
 
             $client->set('/traefik/backends/vfs-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5680');
             $client->set('/traefik/frontends/vfs-'.$instance->id.'/routes/test_1/rule', 'PathPrefixStrip:/vfsproxy/vfs-'.$instance->id);
