@@ -35,7 +35,13 @@ class CloudwareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cloudware = Cloudware::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $request->image,
+            'logo' => $request->logo
+        ]);
+        return $cloudware;
     }
 
     /**
