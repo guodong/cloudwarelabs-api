@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cloudware;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
 class CloudwareController extends Controller
@@ -52,7 +53,7 @@ class CloudwareController extends Controller
      */
     public function show($id)
     {
-        //
+        return Cloudware::find($id);
     }
 
     /**
@@ -75,7 +76,13 @@ class CloudwareController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cloudware = Cloudware::find($id);
+        $cloudware->name = $request->name;
+        $cloudware->description = $request->description;
+        $cloudware->image = $request->image;
+        $cloudware->logo = $request->logo;
+        $cloudware->save();
+        return Response::json(['update success']);
     }
 
     /**

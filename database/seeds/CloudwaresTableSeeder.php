@@ -13,7 +13,7 @@ class CloudwaresTableSeeder extends Seeder
     {
         \App\Models\Cloudware::create([
             'id' => \Ramsey\Uuid\Uuid::uuid4(),
-            'name' => 'matlab',
+            'name' => 'Matlab',
             'logo' => 'http://cloudwarehub.com/apps/matlab/icon.png',
             'description' => 'MathWorks公司出品的商业数学软件',
             'image' => 'cloudwarelabs/xfce4-pulsar-gedit'
