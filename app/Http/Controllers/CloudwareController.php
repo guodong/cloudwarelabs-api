@@ -82,7 +82,7 @@ class CloudwareController extends Controller
         $cloudware->image = $request->image;
         $cloudware->logo = $request->logo;
         $cloudware->save();
-        return Response::json(['update success']);
+        return $cloudware;
     }
 
     /**
