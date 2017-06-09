@@ -93,6 +93,8 @@ class CloudwareController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cloudware = Cloudware::find($id);
+        $cloudware->delete();
+        return ['delete success'];
     }
 }
