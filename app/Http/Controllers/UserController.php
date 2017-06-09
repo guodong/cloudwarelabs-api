@@ -90,7 +90,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $me = $request->user();
+        if ($me->role != 'admin') {
+            return Response::json(['you are not admin'], 403);
+        }
+        $user = User::find($id);
+        $user->role = $request->role;
+        $user->save();
+        return Response::json(['update success']);
     }
 
     /**
