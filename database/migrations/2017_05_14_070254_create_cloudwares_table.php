@@ -16,7 +16,7 @@ class CreateCloudwaresTable extends Migration
         Schema::create('cloudwares', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name');
-            $table->string('logo');
+            $table->text('logo');
             $table->string('description');
             $table->string('image');
             $table->timestamps();
