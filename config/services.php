@@ -41,4 +41,8 @@ return [
         'pass' => env('RANCHER_PASS'),
     ],
 
+    'etcd' => [
+        'server' => env('ETCD_SERVER')
+    ]
+
 ];

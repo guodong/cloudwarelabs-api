@@ -82,7 +82,7 @@ class InstanceController extends Controller
             sleep(1);
         }
         if ($ip) {
-            $client = new \LinkORB\Component\Etcd\Client('http://10.42.246.167:2379');
+            $client = new \LinkORB\Component\Etcd\Client(config('etcd.server'));
             $client->set('/traefik/backends/pulsar-'.$instance->id.'/servers/server1/url', 'http://' . $ip . ':5678');
             $client->set('/traefik/frontends/pulsar-'.$instance->id.'/routes/test_1/rule', 'PathPrefix:/pulsar-'.$instance->id);
             $client->set('/traefik/frontends/pulsar-'.$instance->id.'/backend', 'pulsar-'.$instance->id);
