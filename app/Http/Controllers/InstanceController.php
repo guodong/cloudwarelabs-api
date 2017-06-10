@@ -114,8 +114,7 @@ class InstanceController extends Controller
     {
         $instance = Instance::find($id);
         $instance->cloudware;
-        $instance->ws = 'ws://api.cloudwarelabs.org:81/pulsar-' . $instance->id;
-        $instance->fsapi = 'http://api.cloudwarelabs.org:81/fs-' . $instance->id;
+        $instance->ws = 'ws://' . config('services.proxy.server') . '/pulsar-' . $instance->id;
         return $instance;
     }
 
