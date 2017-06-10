@@ -156,10 +156,26 @@ class InstanceController extends Controller
             ], 404);
         }
 
+        /* delete container */
         $client = new \GuzzleHttp\Client();
         $res = $client->request('DELETE', config('services.rancher.endpoint') . '/projects/1a5/containers/' . $instance->rancher_container_id, [
             'auth' => [config('services.rancher.user'), config('services.rancher.pass')],
         ]);
+
+        /* delete proxy config */
+        $client = new \LinkORB\Component\Etcd\Client(config('services.etcd.server'));
+        $client->rm('/traefik/backends/pulsar-'.$instance->id.'/servers/server1/url');
+        $client->rmdir('/traefik/backends/pulsar-'.$instance->id, true);
+        $client->rm('/traefik/frontends/pulsar-'.$instance->id.'/routes/test_1/rule');
+        $client->rm('/traefik/frontends/pulsar-'.$instance->id.'/backend');
+        $client->rmdir('/traefik/frontends/pulsar-'.$instance->id, true);
+
+        $client->rm('/traefik/backends/vfs-'.$instance->id.'/servers/server1/url');
+        $client->rmdir('/traefik/backends/vfs-'.$instance->id, true);
+        $client->rm('/traefik/frontends/vfs-'.$instance->id.'/routes/test_1/rule');
+        $client->rm('/traefik/frontends/vfs-'.$instance->id.'/backend');
+        $client->rmdir('/traefik/frontends/vfs-'.$instance->id, true);
+
 
         $instance->delete();
 
