@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         \App\Models\User::create([
             'id' => \Ramsey\Uuid\Uuid::uuid4(),
             'username' => 'admin',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('123123'),
             'role' => 'admin'
         ]);
     }
