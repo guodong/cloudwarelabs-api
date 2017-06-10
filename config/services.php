@@ -47,6 +47,10 @@ return [
 
     'proxy' => [
         'server' => env('PROXY_SERVER')
+    ],
+
+    'ide' => [
+        'server' => env('IDE_SERVER')
     ]
 
 ];
