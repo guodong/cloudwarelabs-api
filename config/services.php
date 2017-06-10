@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
@@ -43,6 +43,10 @@ return [
 
     'etcd' => [
         'server' => env('ETCD_SERVER')
+    ],
+
+    'proxy' => [
+        'server' => env('PROXY_SERVER')
     ]
 
 ];

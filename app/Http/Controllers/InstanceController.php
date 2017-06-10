@@ -96,7 +96,7 @@ class InstanceController extends Controller
             $client->set('/traefik/frontends/vfs-'.$instance->id.'/backend', 'vfs-'.$instance->id);
         }
         sleep(8);
-        $instance->ws = 'ws://api.cloudwarelabs.org:81/pulsar-' . $instance->id;
+        $instance->ws = 'ws://' . config('service.proxy.server') . '/pulsar-' . $instance->id;
 
         return $instance;
     }
