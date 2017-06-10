@@ -53,10 +53,13 @@ class InstanceController extends Controller
             'readOnly' => false,
             //'networkMode' => "bridge",
             'type' => "container",
-            'requestedHostId' => "1h5",
+//            'requestedHostId' => "1h5",
             'imageUuid' => "docker:" . $cloudware->image,
             'ports' => ["5678/tcp"],
             'memory' => 134217728 * 4, // 128m*4
+            'labels' => [
+                "io.rancher.scheduler.affinity:host_label" => "cloudware=true"
+            ],
             'command' => ['startxfce4']
         ];
         $client = new \GuzzleHttp\Client();
@@ -96,7 +99,7 @@ class InstanceController extends Controller
             $client->set('/traefik/frontends/vfs-'.$instance->id.'/backend', 'vfs-'.$instance->id);
         }
         sleep(8);
-        $instance->ws = 'ws://' . config('service.proxy.server') . '/pulsar-' . $instance->id;
+        $instance->ws = 'ws://' . config('services.proxy.server') . '/pulsar-' . $instance->id;
 
         return $instance;
     }
