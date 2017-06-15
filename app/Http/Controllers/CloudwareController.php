@@ -40,7 +40,8 @@ class CloudwareController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'image' => $request->image,
-            'logo' => $request->logo
+            'logo' => $request->logo,
+            'memory' => $request->memory
         ]);
         return $cloudware;
     }
