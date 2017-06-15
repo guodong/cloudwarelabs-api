@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cloudware;
 use App\Models\Instance;
+use App\Models\Settings;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7;
@@ -44,6 +45,9 @@ class InstanceController extends Controller
     public function store(Request $request)
     {
         $cloudware = Cloudware::find($request->cloudware_id);
+        $setting = Settings::where('key', 'instance')->first();
+        $instance_settings = json_decode($setting->value);
+        $memory = empty($instance_settings->memory) ? 0 : $instance_settings->memory;
         $data = [
             'instanceTriggeredStop' => "stop",
             'startOnCreate' => true,
@@ -51,17 +55,18 @@ class InstanceController extends Controller
             'stdinOpen' => true,
             'tty' => true,
             'readOnly' => false,
-            //'networkMode' => "bridge",
             'type' => "container",
-//            'requestedHostId' => "1h5",
             'imageUuid' => "docker:" . $cloudware->image,
             'ports' => ["5678/tcp"],
-            'memory' => 134217728 * 8, // 128m*8
+            //'memory' => $memory * (2 << 30), //134217728 * 8, // 128m*8, 2 << 30 = 1G
             'labels' => [
                 "io.rancher.scheduler.affinity:host_label" => "cloudware=true"
             ],
             'command' => ['startxfce4']
         ];
+        if (!empty($memory)) {
+            $data['memory'] = $memory * (2 << 30); // 2 << 30 = 1G
+        }
         $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', config('services.rancher.endpoint') . '/projects/1a5/container', [
             'auth' => [config('services.rancher.user'), config('services.rancher.pass')],

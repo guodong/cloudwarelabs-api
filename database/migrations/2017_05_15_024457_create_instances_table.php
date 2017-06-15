@@ -17,6 +17,7 @@ class CreateInstancesTable extends Migration
             $table->uuid('id');
             $table->uuid('cloudware_id');
             $table->string('rancher_container_id');
+            $table->double('memory', 5, 2);
             $table->uuid('user_id');
             $table->timestamps();
 
