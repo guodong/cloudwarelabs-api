@@ -81,6 +81,7 @@ class CloudwareController extends Controller
         $cloudware->description = $request->description;
         $cloudware->image = $request->image;
         $cloudware->logo = $request->logo;
+        $cloudware->memory = $request->memory;
         $cloudware->save();
         return $cloudware;
     }
