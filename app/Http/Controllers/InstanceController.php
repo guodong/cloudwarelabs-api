@@ -55,6 +55,9 @@ class InstanceController extends Controller
             'type' => "container",
             'imageUuid' => "docker:" . $cloudware->image,
             'ports' => ["5678/tcp"],
+            'environment' => [
+                'DISPLAY' => ''
+            ],
             //'memory' => $memory * (2 << 30), //134217728 * 8, // 128m*8, 2 << 30 = 1G
             'labels' => [
                 "io.rancher.scheduler.affinity:host_label" => "cloudware=true"
