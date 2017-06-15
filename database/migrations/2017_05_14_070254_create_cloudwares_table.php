@@ -19,6 +19,7 @@ class CreateCloudwaresTable extends Migration
             $table->text('logo');
             $table->string('description');
             $table->string('image');
+            $table->double('memory', 5, 2);
             $table->timestamps();
 
             $table->primary('id');

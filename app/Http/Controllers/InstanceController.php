@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cloudware;
 use App\Models\Instance;
-use App\Models\Settings;
+use App\Models\Setting;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7;
@@ -45,9 +45,6 @@ class InstanceController extends Controller
     public function store(Request $request)
     {
         $cloudware = Cloudware::find($request->cloudware_id);
-        $setting = Settings::where('key', 'instance')->first();
-        $instance_settings = json_decode($setting->value);
-        $memory = empty($instance_settings->memory) ? 0 : $instance_settings->memory;
         $data = [
             'instanceTriggeredStop' => "stop",
             'startOnCreate' => true,
@@ -64,8 +61,8 @@ class InstanceController extends Controller
             ],
             'command' => ['startxfce4']
         ];
-        if (!empty($memory)) {
-            $data['memory'] = $memory * (2 << 30); // 2 << 30 = 1G
+        if (!empty($cloudware->memory)) {
+            $data['memory'] = $cloudware->memory * (2 << 30); // 2 << 30 = 1G
         }
         $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', config('services.rancher.endpoint') . '/projects/1a5/container', [
@@ -78,6 +75,7 @@ class InstanceController extends Controller
         $instance = Instance::create([
             'rancher_container_id' => $payload->id,
             'cloudware_id' => $cloudware->id,
+            'memory' => $cloudware->memory,
             'user_id' => $request->user()->id
         ]);
 
