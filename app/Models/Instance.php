@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Instance extends BaseModel
 {
     protected $fillable = [
-        'user_id', 'container_id', 'rancher_container_id', 'cloudware_id'
+        'user_id', 'container_id', 'rancher_container_id', 'cloudware_id', 'memory'
     ];
 
     public function cloudware()
