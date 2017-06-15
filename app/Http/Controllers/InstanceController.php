@@ -62,7 +62,7 @@ class InstanceController extends Controller
             'command' => ['startxfce4']
         ];
         if (!empty($cloudware->memory)) {
-            $data['memory'] = $cloudware->memory * (2 << 30); // 2 << 30 = 1G
+            $data['memory'] = $cloudware->memory * (1 << 30); // 1 << 30 = 1G
         }
         $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', config('services.rancher.endpoint') . '/projects/1a5/container', [
