@@ -28,7 +28,12 @@ class InstanceController extends Controller
 
     public function all()
     {
-        return Instance::all();
+        $instances = Instance::all();
+        foreach ($instances as $i) {
+            $i->cloudware;
+            $i->user;
+        }
+        return $instances;
     }
 
     /**
