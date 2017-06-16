@@ -25,10 +25,9 @@ Route::get('users/current', 'UserController@current');
 
 Route::resource('cloudwares', 'CloudwareController');
 Route::resource('users', 'UserController');
+Route::get('instances/all', 'InstanceController@all');
 
 Route::group(['middleware' => ['jwt.auth']], function () {
    Route::resource('instances', 'InstanceController');
    Route::post('users/current/password', 'UserController@password');
 });
-
-Route::get('settings', 'IndexController@settings');

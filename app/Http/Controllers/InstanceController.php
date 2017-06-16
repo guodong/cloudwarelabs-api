@@ -26,6 +26,11 @@ class InstanceController extends Controller
         return $instances;
     }
 
+    public function all()
+    {
+        return Instance::all();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
