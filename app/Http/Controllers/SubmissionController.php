@@ -6,6 +6,7 @@ use App\Models\Cloudware;
 use App\Models\Homework;
 use App\Models\Instance;
 use App\Models\Setting;
+use App\Models\Submission;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7;
@@ -20,7 +21,7 @@ class SubmissionController extends Controller
      */
     public function index(Request $request)
     {
-        $submissions = $request->user()->submissions();
+        $submissions = $request->user()->submissions;
         return $submissions;
     }
 
@@ -32,12 +33,13 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
-        $homework = Homework::create([
-            'title' => $request->title,
+        $submission = Submission::create([
+            'homework_id' => $request->homework_id,
             'description' => $request->description,
-            'teacher_id' => $request->user()->id,
+            'instance_id' => $request->instance_id,
+            'user_id' => $request->user()->id,
         ]);
-        return $homework;
+        return $submission;
     }
 
     /**
@@ -48,7 +50,7 @@ class SubmissionController extends Controller
      */
     public function show($id)
     {
-        return Homework::find($id);
+        return Submission::find($id);
     }
 
     /**
