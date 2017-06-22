@@ -33,3 +33,5 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 });
 
 Route::get('settings', 'IndexController@settings');
+
+Route::resource('homework', 'HomeworkController');
