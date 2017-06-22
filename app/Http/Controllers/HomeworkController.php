@@ -77,4 +77,8 @@ class HomeworkController extends Controller
         return ['result' => 'success'];
     }
 
+    public function submissions(Request $request, $homework_id)
+    {
+        return Homework::find($homework_id)->submissions;
+    }
 }
