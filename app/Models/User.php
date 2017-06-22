@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Instance');
     }
+
+    public function submissions()
+    {
+        return $this->hasMany('App\Models\Submission');
+    }
 }

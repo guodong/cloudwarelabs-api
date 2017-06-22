@@ -18,11 +18,14 @@ class CreateSubmissionsTable extends Migration
             $table->string('homework_id');
             $table->text('description');
             $table->uuid('user_id');
+            $table->integer('status')->default(0);
+            $table->uuid('instance_id');
             $table->timestamps();
 
             $table->primary('id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('homework_id')->references('id')->on('homeworks');
+            $table->foreign('instance_id')->references('id')->on('instances');
         });
     }
 
