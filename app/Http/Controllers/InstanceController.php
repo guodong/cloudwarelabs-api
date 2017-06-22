@@ -22,6 +22,7 @@ class InstanceController extends Controller
         $instances = $request->user()->instances;
         foreach ($instances as $i) {
             $i->cloudware;
+            $i->submission;
         }
         return $instances;
     }

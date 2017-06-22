@@ -10,6 +10,7 @@ use App\Models\Submission;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rules\In;
 
 class SubmissionController extends Controller
@@ -22,6 +23,9 @@ class SubmissionController extends Controller
     public function index(Request $request)
     {
         $submissions = $request->user()->submissions;
+        $submissions->each(function ($submission) {
+            $submission->homework->teacher;
+        });
         return $submissions;
     }
 
@@ -33,6 +37,9 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
+        if (Submission::where('instance_id', $request->instance_id)->where('homework_id', $request->homework_id)->first()) {
+            return Response::json(['error' => 'this instance has already submitted'], 400);
+        }
         $submission = Submission::create([
             'homework_id' => $request->homework_id,
             'description' => $request->description,
@@ -73,6 +80,8 @@ class SubmissionController extends Controller
      */
     public function destroy($id)
     {
+        $submission = Submission::find($id);
+        $submission->delete();
         return ['result' => 'success'];
     }
 

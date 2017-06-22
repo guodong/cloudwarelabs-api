@@ -11,9 +11,9 @@ class Submission extends BaseModel
         'user_id', 'homework_id', 'description', 'instance_id'
     ];
 
-    public function submissions()
+    public function homework()
     {
-        return $this->hasMany('App\Models\Submission');
+        return $this->belongsTo('App\Models\Homework');
     }
 
     public function user()
