@@ -21,11 +21,7 @@ class SubmissionController extends Controller
     public function index(Request $request)
     {
         $submissions = $request->user()->submissions();
-        $homeworks = Homework::all();
-        foreach ($homeworks as $homework) {
-            $homework->teacher;
-        }
-        return $homework;
+        return $submissions;
     }
 
     /**
