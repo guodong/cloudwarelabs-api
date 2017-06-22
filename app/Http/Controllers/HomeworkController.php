@@ -79,6 +79,10 @@ class HomeworkController extends Controller
 
     public function submissions(Request $request, $homework_id)
     {
-        return Homework::find($homework_id)->submissions;
+        $submissions = Homework::find($homework_id)->submissions;
+        $submissions->each(function($submission) {
+            $submission->user;
+        });
+        return $submissions;
     }
 }
