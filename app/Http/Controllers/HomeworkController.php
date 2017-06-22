@@ -24,7 +24,7 @@ class HomeworkController extends Controller
         foreach ($homeworks as $homework) {
             $homework->teacher;
         }
-        return $homework;
+        return $homeworks;
     }
 
     /**
