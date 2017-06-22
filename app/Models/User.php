@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Submission');
     }
+
+    public function homeworks()
+    {
+        return $this->hasMany('App\Models\Homework', 'teacher_id');
+    }
 }

@@ -30,6 +30,7 @@ Route::get('instances/all', 'InstanceController@all');
 Route::group(['middleware' => ['jwt.auth']], function () {
    Route::resource('instances', 'InstanceController');
    Route::post('users/current/password', 'UserController@password');
+   Route::get('users/current/homeworks', 'UserController@homeworks');
 });
 
 Route::get('settings', 'IndexController@settings');

@@ -167,4 +167,9 @@ class UserController extends Controller
         $user->save();
         return response()->json(['password update success']);
     }
+
+    public function homeworks(Request $request)
+    {
+        return $request->user()->homeworks;
+    }
 }
