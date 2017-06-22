@@ -37,3 +37,4 @@ Route::get('settings', 'IndexController@settings');
 
 Route::resource('homeworks', 'HomeworkController');
 Route::get('homeworks/{homework_id}/submissions', 'HomeworkController@submissions');
+Route::resource('submissions', 'SubmissionController');
