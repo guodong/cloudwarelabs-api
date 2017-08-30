@@ -56,6 +56,7 @@ class InstanceController extends Controller
     public function store(Request $request)
     {
         $cloudware = Cloudware::find($request->cloudware_id);
+        $file = $request->file;
         $data = [
             'instanceTriggeredStop' => "stop",
             'startOnCreate' => true,
@@ -67,7 +68,8 @@ class InstanceController extends Controller
             'imageUuid' => "docker:" . $cloudware->image,
             'ports' => ["5678/tcp"],
             'environment' => [
-                'DISPLAY' => ''
+                'DISPLAY' => '',
+                'FILE' => $file
             ],
             //'memory' => $memory * (2 << 30), //134217728 * 8, // 128m*8, 2 << 30 = 1G
             'labels' => [
